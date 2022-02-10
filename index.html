@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+    <head>
+
+    </head>
+    <script src="/jquery/dist/jquery.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        var socket = io.connect('http://localhost:4200');
+        
+        socket.on('connect', function(data) {
+            alert("You have connected to the server");
+        });
+        
+        socket.on('broad', function(data) {
+            $('#future').append(data+ "<br/>");
+        });
+        $(document).on("click","#send", function(e){
+            var message = $("#chat_input").val();
+            socket.emit('messages', message);
+        })
+
+    </script>
+    <body>
+        <h1>Hello World!</h1>
+        <div id="future"></div>
+            <input id="chat_input" type="text">
+            <input type="submit" value="Send" id="send">
+    </body>
+</html>
