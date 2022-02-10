@@ -10,11 +10,9 @@ app.get('/', function(req, res,next) {
 });
 
 io.on('connection', function(client) {
-    // /console.log('Client connected...');
     client.on('join', function(data) {
     });
     client.on('messages', function(data) {
-        //console.log(data);
         client.emit('broad', data);
         client.broadcast.emit('broad',data);
     });
